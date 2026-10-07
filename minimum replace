@@ -1,0 +1,15 @@
+#include <stdio.h>
+long long minimumReplacement(int* nums, int numsSize) {
+    long long operations = 0;
+    long long next_val = nums[numsSize - 1];
+    for (int i = numsSize - 2; i >= 0; i--) {
+        if (nums[i] > next_val) {
+            long long k = (nums[i] + next_val - 1) / next_val;
+            operations += (k - 1);
+            next_val = nums[i] / k;
+        } else {
+            next_val = nums[i];
+        }
+    }
+    return operations;
+}
